@@ -1,0 +1,1 @@
+gunicorn shop_list.main:create_app --access-logfile=- --error-logfile=- --log-level=info -w 4 -k shop_list.asgi.FactoryUvirocnWorker -b 0.0.0.0:80

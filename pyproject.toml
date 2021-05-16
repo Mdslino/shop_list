@@ -1,0 +1,38 @@
+[tool.poetry]
+name = "shop_list"
+version = "0.1.0"
+description = ""
+authors = ["Marcelo Lino <mdslino@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+fastapi = "^0.64.0"
+psycopg2-binary = "^2.8.6"
+SQLAlchemy = "^1.4.14"
+alembic = "^1.6.2"
+gunicorn = "^20.1.0"
+uvicorn = {extras = ["standard"], version = "^0.13.4"}
+python-jose = "^3.2.0"
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+asyncpg = "^0.22.0"
+SQLAlchemy-Utils = "^0.37.2"
+certifi = "^2020.12.5"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.4"
+black = "^21.5b0"
+ipython = "^7.23.1"
+pytest-cov = "^2.11.1"
+pytest-dotenv = "^0.5.2"
+requests = "^2.25.1"
+Faker = "^8.1.2"
+pytest-asyncio = "^0.15.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 79
+target-version = ['py39']
+include = '\.pyi?$'
