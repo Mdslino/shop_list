@@ -1,6 +1,14 @@
 from typing import Optional
 
-from pydantic import UUID4, BaseModel, EmailStr
+from pydantic import UUID4, BaseModel, EmailStr, validator
+
+
+class UserValidationMixin:
+    @validator("verify_password")
+    def passwords_match(cls, v, values, **kwargs):
+        if "password" in values and v != values["verify_password"]:
+            raise ValueError("passwords do not match")
+        return v
 
 
 class UserBase(BaseModel):
@@ -9,7 +17,7 @@ class UserBase(BaseModel):
     email: Optional[EmailStr] = None
 
 
-class UserCreate(UserBase):
+class UserCreate(UserBase, UserValidationMixin):
     first_name: str
     last_name: str
     email: str
@@ -17,7 +25,7 @@ class UserCreate(UserBase):
     verify_password: str
 
 
-class UserUpdate(UserBase):
+class UserUpdate(UserBase, UserValidationMixin):
     password: Optional[str]
     verify_password: Optional[str]
 

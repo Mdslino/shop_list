@@ -16,7 +16,7 @@ clean:
 	rm -rf docs/_build
 
 test:
-	@PYTHONPATH=$(CURRENT_DIR) pytest -x -v --cov=./shop_list --cov-report term-missing tests/
+	@PYTHONPATH=$(CURRENT_DIR) pytest -x --cov=./shop_list --cov-report term-missing tests/
 
 requirements:
 	@echo "Iniciando a criação de $(CURRENT_DIR)/requirements.txt"
