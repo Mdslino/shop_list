@@ -6,8 +6,9 @@ from fastapi.testclient import TestClient
 from shop_list.db.base import Base
 from shop_list.db.session import connection_string, engine
 from shop_list.main import create_app
-from sqlalchemy_utils import create_database, database_exists, drop_database
+from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy_utils import create_database, database_exists, drop_database
 
 
 @pytest.fixture
@@ -45,6 +46,7 @@ def create_database_fixture():
 @pytest.fixture(scope="session", autouse=True)
 async def create_tables(create_database_fixture):
     async with engine.begin() as conn:
+        await conn.execute(text('CREATE EXTENSION IF NOT EXISTS "uuid-ossp";'))
         await conn.run_sync(Base.metadata.drop_all)
         await conn.run_sync(Base.metadata.create_all)
 
