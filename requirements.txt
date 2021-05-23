@@ -29,7 +29,7 @@ python-multipart==0.0.5
 pyyaml==5.4.1
 rsa==4.7.2
 six==1.16.0
-sqlalchemy-utils==0.37.3
+sqlalchemy-utils==0.37.4
 sqlalchemy==1.4.15
 starlette==0.13.6
 typing-extensions==3.10.0.0

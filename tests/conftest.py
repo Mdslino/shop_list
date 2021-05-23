@@ -3,12 +3,25 @@ import asyncio
 import pytest
 from fastapi.applications import FastAPI
 from fastapi.testclient import TestClient
+from pytest_factoryboy import register
 from shop_list.db.base import Base
 from shop_list.db.session import connection_string, engine
 from shop_list.main import create_app
-from sqlalchemy import text
+from sqlalchemy import create_engine, text
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy_utils import create_database, database_exists, drop_database
+from tests_helpers import common
+from tests_helpers.factories import UserFactory
+
+register(UserFactory)
+
+
+@pytest.fixture(scope="session", autouse=True)
+def sync_engine():
+    new_connection_string = connection_string.replace("asyncpg", "psycopg2")
+    engine = create_engine(new_connection_string)
+
+    common.Session.configure(bind=engine)
 
 
 @pytest.fixture

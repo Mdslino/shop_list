@@ -14,9 +14,10 @@ clean:
 	rm -rf htmlcov
 	rm -rf .tox/
 	rm -rf docs/_build
+	rm -rf .pytest_cache
 
 test:
-	@PYTHONPATH=$(CURRENT_DIR) pytest -x --cov=./shop_list --cov-report term-missing tests/
+	@PYTHONPATH=$(CURRENT_DIR) pytest -x --cov-report term-missing:skip-covered --cov=./shop_list tests/
 
 requirements:
 	@echo "Iniciando a criação de $(CURRENT_DIR)/requirements.txt"
