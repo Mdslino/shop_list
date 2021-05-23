@@ -1,4 +1,6 @@
 from fastapi import FastAPI
+
+from shop_list.api.api_v1.api import api_router
 from shop_list.core.config import settings
 
 
@@ -10,6 +12,8 @@ def create_app() -> FastAPI:
 
     @app.get("/health-check")
     async def health_check():
-        return {'status': 'ok'}
+        return {"status": "ok"}
+
+    app.include_router(api_router, prefix=settings.API_V1_STR)
 
     return app

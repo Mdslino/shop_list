@@ -24,10 +24,22 @@ class UserCreate(UserBase, UserValidationMixin):
     password: str
     verify_password: str
 
+    @validator("verify_password")
+    def passwords_match(cls, v, values, **kwargs):
+        if "password" in values and v != values["password"]:
+            raise ValueError("passwords do not match")
+        return v
+
 
 class UserUpdate(UserBase, UserValidationMixin):
     password: Optional[str]
     verify_password: Optional[str]
+
+    @validator("verify_password")
+    def passwords_match(cls, v, values, **kwargs):
+        if "password" in values and v != values["verify_password"]:
+            raise ValueError("passwords do not match")
+        return v
 
 
 class UserInDBBase(UserBase):

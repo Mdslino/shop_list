@@ -22,7 +22,7 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
             first_name=obj_in.first_name,
             last_name=obj_in.last_name,
             email=obj_in.email,
-            password=get_password_hash(obj_in.password),
+            hashed_password=get_password_hash(obj_in.password),
         )
 
         db.add(db_obj)
