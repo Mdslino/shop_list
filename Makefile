@@ -17,6 +17,7 @@ clean:
 	rm -rf .pytest_cache
 
 test:
+	@docker-compose up -d database
 	@PYTHONPATH=$(CURRENT_DIR) pytest -x --cov-report term-missing:skip-covered --cov=./shop_list tests/
 
 requirements:
