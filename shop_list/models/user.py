@@ -1,7 +1,5 @@
 from shop_list.db.base_class import SqlAlchemyBaseModel
-from sqlalchemy import String
-from sqlalchemy.sql.expression import null
-from sqlalchemy.sql.schema import Column
+from sqlalchemy import String, Column
 
 
 class User(SqlAlchemyBaseModel):
